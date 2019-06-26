@@ -1,8 +1,17 @@
 from django.shortcuts import render
+from django.views.generic.base import TemplateView
 
 # Create your views here.
-def home(request):
-    return render(request, 'core/home.html')
+class HomeView(TemplateView):
+    template_name = 'core/home.html' # definimos el template de la página principal
 
-def about(request):
-    return render(request, 'core/about.html')
+    # redefinimos get para pasarle el contexto title de forma personalizada
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name, {'title': 'Django and PostgreSQL'})
+
+class AboutView(TemplateView):
+    template_name = 'core/about.html' # definimos el template del about
+
+    # redefinimos get para pasarle el contexto username de forma personalizada
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name, {'username': request.user.username})

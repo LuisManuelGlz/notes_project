@@ -1,17 +1,15 @@
 {% extends 'core/base.html' %}
 {% block title %}Log in{% endblock %}
-
+{% load widget_tweaks %}
 {% block content %}
     {% if form.errors %}
-        {% for field in form %}
-            {% for error in field.errors %}
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    {{ error|striptags }}
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            {% endfor %}
+        {% for error in form.non_field_errors %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ error|striptags }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
         {% endfor %}
     {% endif %}
     <div class="row">
@@ -24,10 +22,10 @@
                     <form method="POST">
                         {% csrf_token %}
                         <div class="form-group">
-                            {{ form.username }}
+                            {{ form.username|attr:"class:form-control"|attr:"placeholder:Username"|attr:"autofocus" }}
                         </div>
                         <div class="form-group">
-                            {{ form.password }}
+                            {{ form.password|attr:"class:form-control"|attr:"placeholder:Password" }}
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary btn-block">Log in</button>

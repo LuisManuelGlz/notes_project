@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'core.apps.CoreConfig',
     'notes.apps.NotesConfig',
     'users.apps.UsersConfig',
+    'widget_tweaks',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -127,3 +128,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 LOGIN_URL = 'login'
+
+LOGIN_REDIRECT_URL = 'all-notes' # para que no ande redireccionando a accounts/profile
+
+LOGOUT_REDIRECT_URL = 'login' # para que no ande redireccionando a la ruta del admin
