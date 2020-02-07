@@ -127,8 +127,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-LOGIN_URL = 'login'
+LOGIN_URL = 'users:login'
 
-LOGIN_REDIRECT_URL = 'all-notes' # para que no ande redireccionando a accounts/profile
+LOGIN_REDIRECT_URL = 'notes:all-notes' # para que no ande redireccionando a accounts/profile
 
-LOGOUT_REDIRECT_URL = 'login' # para que no ande redireccionando a la ruta del admin
+LOGOUT_REDIRECT_URL = 'users:login' # para que no ande redireccionando a la ruta del admin

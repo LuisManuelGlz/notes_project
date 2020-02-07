@@ -33,7 +33,7 @@ class AddNoteView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Note # definimos el modelo con el que trabajarán las vistas
     template_name = 'notes/add_note.html' # definimos el template para crear una nota
     form_class = NoteForm # usamos nuestro formulario ya creado
-    success_url = reverse_lazy('all-notes') # redireccionamos a todas las notas
+    success_url = reverse_lazy('notes:all-notes') # redireccionamos a todas las notas
     success_message = 'Note added siccessfully' # le decimos al usuario que la nota se creó exitosamente
 
     # redefinimos form_valid para decirle a la base de datos a quién pertenece la nota
@@ -48,7 +48,7 @@ class EditNoteView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Note # definimos el modelo con el que trabajarán las vistas
     template_name = 'notes/edit_note.html' # definimos el template para editar una nota
     form_class = NoteForm # usamos nuestro formulario ya creado
-    success_url = reverse_lazy('all-notes') # redireccionamos a todas las notas
+    success_url = reverse_lazy('notes:all-notes') # redireccionamos a todas las notas
     success_message = 'Note updated successfully' # le decimos al usuario que la nota se actualizó exitosamente
 
     """
@@ -61,7 +61,7 @@ class EditNoteView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 # @method_decorator(login_required, name='dispatch') # restringimos el acceso a menos que hayas inicias sesión
 class DeleteNoteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Note # definimos el modelo con el que trabajarán las vistas
-    success_url = reverse_lazy('all-notes') # redireccionamos a todas las notas
+    success_url = reverse_lazy('notes:all-notes') # redireccionamos a todas las notas
     success_message = 'Note deleted successfully' # le decimos al usuario que la nota se eliminó exitosamente
 
     # no tenía la intención de usar esta función pero no se mostraba el success_message
