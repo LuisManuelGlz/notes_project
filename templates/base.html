@@ -36,16 +36,22 @@
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     {% if user.is_authenticated %}
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-                            role="button" data-toggle="dropdown" aria-haspopup="true">Notes</a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{% url 'all-notes' %}">All notes</a>
-                                <a class="dropdown-item" href="{% url 'add-note' %}">Add note</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{% url 'logout' %}">Log out</a>
-                            </div>
-                        </li>
+                        <!-- <li class="nav-item dropdown"> -->
+                            <!-- <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                            role="button" data-toggle="dropdown" aria-haspopup="true">Notes</a> -->
+                            <!-- <div class="dropdown-menu" aria-labelledby="navbarDropdown"> -->
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'all-notes' %}">All notes</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'add-note' %}">Add note</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'logout' %}">Log out</a>
+                                </li>
+                                <!-- <div class="dropdown-divider"></div> -->
+                            <!-- </div> -->
+                        <!-- </li> -->
                     {% else %}
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'login' %}">Log in</a>
