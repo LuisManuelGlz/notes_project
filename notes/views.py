@@ -3,7 +3,8 @@ from django.urls import reverse_lazy
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.utils.decorators import method_decorator
-from django.contrib.auth.decorators import login_required
+# from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from .models import Note
 from .forms import NoteForm
@@ -15,8 +16,8 @@ from django.views.generic import (
 )
 
 # Create your views here.
-@method_decorator(login_required, name='dispatch') # restringimos el acceso a menos que hayas inicias sesión
-class NotesView(ListView):
+# @method_decorator(login_required, name='dispatch') # restringimos el acceso a menos que hayas inicias sesión
+class NotesView(LoginRequiredMixin, ListView):
     # model = Note # definimos el modelo con el que trabajarán las vistas
     template_name = 'notes/all_notes.html' # definimos el template donde estarán todas las notas
     context_object_name = 'notes' # el contexto que usará el template
@@ -27,8 +28,8 @@ class NotesView(ListView):
         user = get_object_or_404(User, username=self.request.user)
         return Note.objects.filter(user=user).order_by('-updated')
 
-@method_decorator(login_required, name='dispatch') # restringimos el acceso a menos que hayas inicias sesión
-class AddNoteView(SuccessMessageMixin, CreateView):
+# @method_decorator(login_required, name='dispatch') # restringimos el acceso a menos que hayas inicias sesión
+class AddNoteView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Note # definimos el modelo con el que trabajarán las vistas
     template_name = 'notes/add_note.html' # definimos el template para crear una nota
     form_class = NoteForm # usamos nuestro formulario ya creado
@@ -42,8 +43,8 @@ class AddNoteView(SuccessMessageMixin, CreateView):
         self.object.save() # guardamos la nota con el usuario ya establecido
         return super().form_valid(form)
 
-@method_decorator(login_required, name='dispatch') # restringimos el acceso a menos que hayas inicias sesión
-class EditNoteView(SuccessMessageMixin, UpdateView):
+# @method_decorator(login_required, name='dispatch') # restringimos el acceso a menos que hayas inicias sesión
+class EditNoteView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Note # definimos el modelo con el que trabajarán las vistas
     template_name = 'notes/edit_note.html' # definimos el template para editar una nota
     form_class = NoteForm # usamos nuestro formulario ya creado
@@ -57,8 +58,8 @@ class EditNoteView(SuccessMessageMixin, UpdateView):
     #     form.instance.user = self.request.user
     #     return super().form_valid(form)
 
-@method_decorator(login_required, name='dispatch') # restringimos el acceso a menos que hayas inicias sesión
-class DeleteNoteView(SuccessMessageMixin, DeleteView):
+# @method_decorator(login_required, name='dispatch') # restringimos el acceso a menos que hayas inicias sesión
+class DeleteNoteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Note # definimos el modelo con el que trabajarán las vistas
     success_url = reverse_lazy('all-notes') # redireccionamos a todas las notas
     success_message = 'Note deleted successfully' # le decimos al usuario que la nota se eliminó exitosamente

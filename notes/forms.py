@@ -9,6 +9,19 @@ class NoteForm(forms.ModelForm):
         
         # personalizamos los campos con clases de Bootstrap
         widgets = {
-            'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Title', 'autofocus': True}),
-            'description': forms.Textarea(attrs={'class': 'form-control', 'cols': False, 'rows': False, 'placeholder': 'Description'}),
+            'title': forms.TextInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Title',
+                    'autofocus': True
+                }
+            ),
+            'description': forms.Textarea(
+                attrs={
+                    'class': 'form-control',
+                    'cols': False,
+                    'rows': False,
+                    'placeholder': 'Description'
+                }
+            ),
         }
